@@ -17,15 +17,20 @@ router.get('*', function(request, response) {
             location: request.url
         },
         function(error, redirectLocation, renderProps) {
-            if (renderProps) {
+            if (error) { 
+                response.status(500).send(error.message) 
+            } else if (redirectLocation) { 
+                response.redirect(302, redirectLocation.pathname + redirectLocation.search) 
+            } else if (renderProps) {
                 const html = renderToString(
                     <Provider store={store}>
                         <RouterContext {...renderProps} />
                     </Provider>
                 );
-                response.send(html);
-            } else {
-                response.status(404).send('Not Found');
+                response.status(200)
+                .send(html) 
+            } else { 
+                response.status(404).send('Not found') 
             }
         }
     );

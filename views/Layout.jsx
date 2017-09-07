@@ -31,6 +31,7 @@ class Layout extends React.Component {
                             <Link to='/about'>About</Link>
                         </li>
                     </ul>
+                    {/* <img src={require('/image/dnd.png')} /> */}
                     <script dangerouslySetInnerHTML={{
                         __html: 'window.PROPS=' + JSON.stringify(custom)
                     }} />
