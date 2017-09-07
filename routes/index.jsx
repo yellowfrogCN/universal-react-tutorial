@@ -1,31 +1,34 @@
-var router = require('express').Router();
-var React = require('react');
-var ReactDOMServer = require('react-dom/server');
-var ReactRouter = require('react-router');
-var Redux = require('redux');
-var Provider = require('react-redux').Provider;
-
-function reducer(state) { return state; }
+const router = require('express').Router();
+import React from 'react';
+// const React = require('react');
+// const ReactDOMServer = require('react-dom/server');
+import { renderToString } from 'react-dom/server';
+// const ReactRouter = require('react-router');
+import {match, RouterContext} from 'react-router';
+import {Provider} from 'react-redux';
+// const Provider = require('react-redux').Provider;
+import store from '../configureStore';
 
 router.get('*', function(request, response) {
-    var initialState = { title: 'Universal React' };
-    var store = Redux.createStore(reducer, initialState);
-
-    ReactRouter.match({
-        routes: require('./routes.jsx'),
-        location: request.url
-    }, function(error, redirectLocation, renderProps) {
-        if (renderProps) {
-            var html = ReactDOMServer.renderToString(
-                <Provider store={store}>
-                    <ReactRouter.RouterContext {...renderProps} />
-                </Provider>
-            );
-            response.send(html);
-        } else {
-            response.status(404).send('Not Found');
+    match(
+        {
+            routes: require('./routes.jsx'),
+            location: request.url
+        },
+        function(error, redirectLocation, renderProps) {
+            console.log('renderProps', renderProps)
+            if (renderProps) {
+                const html = renderToString(
+                    <Provider store={store}>
+                        <RouterContext {...renderProps} />
+                    </Provider>
+                );
+                response.send(html);
+            } else {
+                response.status(404).send('Not Found');
+            }
         }
-    });
+    );
 });
 
 module.exports = router;

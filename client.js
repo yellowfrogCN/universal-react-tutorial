@@ -3,10 +3,10 @@ var React = require('react');
 var routes = require('./routes/routes.jsx');
 var Redux = require('redux');
 var Provider = require('react-redux').Provider;
+import store from './configureStore';
+// function reducer(state) { return state; }
 
-function reducer(state) { return state; }
-
-var store = Redux.createStore(reducer, window.PROPS);
+// var store = Redux.createStore(reducer, window.PROPS);
 
 ReactDOM.render(
     <Provider store={store}>

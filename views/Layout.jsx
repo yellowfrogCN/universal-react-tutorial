@@ -3,11 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 class Layout extends React.Component {
-    constructor() {
-        super();
-        this._handleClick = this._handleClick.bind(this);
-    }
-    _handleClick() {
+    _handleClick = () => {
         alert(this.props.custom.title);
     }
     render() {
