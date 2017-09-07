@@ -3,15 +3,19 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 class Layout extends React.Component {
-    _handleClick = () => {
-        alert(this.props.custom.title);
+    constructor (props) {
+        super(props);
+        this._handleClick = this._handleClick.bind(this)
+    }
+    _handleClick () {
+        console.log(this.props.custom);
     }
     render() {
         const { custom } = this.props;
         return (
             <html>
                 <head>
-                    <title>{custom.title}</title>
+                    <title>黄庆华很帅气</title>
                     <link rel='stylesheet' href='/style.css' />
                 </head>
                 <body>

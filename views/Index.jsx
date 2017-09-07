@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default function Index() {
-    return (
-        <p>
-            Current: <strong>Index</strong>
-        </p>
-    );
+class Index extends Component {
+    componentDidMount () {
+        console.log('Index', this.props);
+    }
+    render() {
+        return (
+            <p>
+                Current: Index
+            </p>
+        );
+    }
 }
+
+export default Index;

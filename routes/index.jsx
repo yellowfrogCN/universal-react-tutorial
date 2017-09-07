@@ -10,13 +10,13 @@ import {Provider} from 'react-redux';
 import store from '../configureStore';
 
 router.get('*', function(request, response) {
+    console.log(13, request.url)
     match(
         {
             routes: require('./routes.jsx'),
             location: request.url
         },
         function(error, redirectLocation, renderProps) {
-            console.log('renderProps', renderProps)
             if (renderProps) {
                 const html = renderToString(
                     <Provider store={store}>
